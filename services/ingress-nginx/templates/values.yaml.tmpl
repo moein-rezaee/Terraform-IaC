@@ -1,0 +1,25 @@
+controller:
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: true
+
+  ingressClass: nginx
+
+  service:
+    type: NodePort
+    nodePorts:
+      http: ${node_port_http}
+      # حذف یا کامنت کردن پورت HTTPS
+      # https: ${node_port_https}
+
+  metrics:
+    enabled: true
+
+  admissionWebhooks:
+    enabled: true
+
+  # غیرفعال کردن redirect به HTTPS
+  config:
+    ssl-redirect: "false"
+    force-ssl-redirect: "false"

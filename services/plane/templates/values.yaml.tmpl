@@ -1,0 +1,61 @@
+auth:
+  password: "${postgresql_password}"
+
+externalDatabase:
+  host: postgresql.postgresql.svc.cluster.local
+  port: 5432
+  username: postgres
+  password: "${postgresql_password}"
+
+externalRedis:
+  host: redis-master.redis.svc.cluster.local
+  port: 6379
+  password: "${redis_password}"
+
+env:
+  remote_redis_url: "redis://:${redis_password}@redis-master.redis.svc.cluster.local:6379"
+  pgdb_remote_url: "postgresql://postgres:${postgresql_password}@postgresql.postgresql.svc.cluster.local:5432/plane"
+  secret_key: "${secret_key}"
+  docstore_bucket: uploads
+
+minio:
+  image: "docker.io/bitnami/minio:2025.4.22-debian-12-r1"
+  image_mc: "minio/mc:RELEASE.2023-10-14T01-57-03Z"
+  local_setup: true
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    volumeSize: 1Gi
+
+persistence:
+  enabled: true
+  storageClass: "local-path"
+
+postgres:
+  local_setup: false
+
+redis:
+  local_setup: false
+
+web:
+  assign_cluster_ip: false
+
+ingress:
+  enabled: true
+  ingressClass: nginx
+
+  appHost: plane.mafialegends.site
+  minioHost: minio.mafialegends.site
+  rabbitmqHost: rabbit.mafialegends.site
+
+
+  ingress_annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+  paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: plane-web
+          port:
+            number: 3000

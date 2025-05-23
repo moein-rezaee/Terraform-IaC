@@ -1,0 +1,9 @@
+auth:
+  enablePostgresUser: true
+  postgresPassword: "${postgresql_password}"
+
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: "local-path"
