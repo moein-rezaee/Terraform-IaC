@@ -34,3 +34,12 @@ module "plane" {
   base_domain         = var.base_domain
   rabbitmq_password   = var.rabbitmq_password
 }
+
+module "gitea" {
+  source               = "../../services/gitea"
+  name                 = "gitea"
+  namespace            = "gitea"
+  chart_version        = "10.1.2"
+  postgresql_password  = var.postgresql_password
+  redis_password       = var.redis_password
+}
