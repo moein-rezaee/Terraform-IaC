@@ -17,9 +17,20 @@ module "ingress_nginx" {
   node_port_https = 30333
 }
 
+module "rabbitmq" {
+  source            = "../../services/rabbitmq"
+  name              = "rabbitmq"
+  namespace         = "rabbitmq"
+  chart_version     = "12.0.5"
+  rabbitmq_password = var.rabbitmq_password
+  base_domain       = var.base_domain
+}
+
 module "plane" {
   source              = "../../services/plane"
   redis_password      = var.redis_password
   postgresql_password = var.postgresql_password
   secret_key          = var.secret_key
+  base_domain         = var.base_domain
+  rabbitmq_password   = var.rabbitmq_password
 }

@@ -1,0 +1,28 @@
+auth:
+  username: rabbitmq
+  password: "${rabbitmq_password}"
+
+replicaCount: 1
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: "local-path"
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: "rabbitmq.${base_domain}"
+  path: /
+  pathType: Prefix
+  tls: false
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+
+controller:
+  service:
+    type: NodePort  # مهم برای اینکه NGINX لوکال از بیرون بتونه دسترسی داشته باشه

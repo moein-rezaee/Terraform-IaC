@@ -37,18 +37,21 @@ postgres:
 redis:
   local_setup: false
 
+rabbitmq:
+  local_setup: false
+  external_rabbitmq_url: "amqp://rabbitmq:${rabbitmq_password}@rabbitmq.rabbitmq.svc.cluster.local:5672"
+  # user: rabbitmq (یا هرچی که موقع نصب rabbitmq دادی)
+  # password: ${rabbitmq_password} مقدار ست شده‌ت
+
 web:
   assign_cluster_ip: false
 
 ingress:
   enabled: true
   ingressClass: nginx
-
-  appHost: plane.mafialegends.site
-  minioHost: minio.mafialegends.site
-  rabbitmqHost: rabbit.mafialegends.site
-
-
+  appHost: plane.${base_domain}
+  minioHost: minio.${base_domain}
+  rabbitmqHost: rabbitmq.${base_domain}
   ingress_annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "5m"
   paths:

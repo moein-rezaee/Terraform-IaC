@@ -3,6 +3,8 @@ locals {
     redis_password      = var.redis_password
     postgresql_password = var.postgresql_password
     secret_key          = var.secret_key
+    rabbitmq_password   = var.rabbitmq_password
+    base_domain         = var.base_domain
 
     # app_host    = "plane.82.115.21.193.nip.io"
     # minio_host  = "minio.82.115.21.193.nip.io"

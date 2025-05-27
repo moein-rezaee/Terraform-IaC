@@ -22,3 +22,12 @@ variable "secret_key" {
   type        = string
   description = "Secret key for Django or Plane application"
 }
+
+variable "base_domain" {
+  type = string
+}
+
+variable "rabbitmq_password" {
+  type      = string
+  sensitive = true
+}
