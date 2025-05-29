@@ -22,3 +22,8 @@ variable "base_domain" {
   type        = string
   description = "Base domain for ingress, like 'example.com'"
 }
+
+variable "harbor_admin_password" {
+  type      = string
+  sensitive = true
+}

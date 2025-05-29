@@ -43,3 +43,10 @@ module "gitea" {
   postgresql_password  = var.postgresql_password
   redis_password       = var.redis_password
 }
+
+module "harbor" {
+  source              = "../../services/harbor"
+  postgresql_password = var.postgresql_password
+  redis_password      = var.redis_password
+  harbor_admin_password = var.harbor_admin_password
+}
