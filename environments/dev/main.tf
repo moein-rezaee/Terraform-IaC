@@ -60,3 +60,8 @@ module "woodpecker" {
   gitea_client_id         = var.gitea_client_id
   gitea_client_secret     = var.gitea_client_secret
 }
+
+module "argocd" {
+  source = "../../services/argocd"
+  hostname = "argocd.mafialegends.site"
+}

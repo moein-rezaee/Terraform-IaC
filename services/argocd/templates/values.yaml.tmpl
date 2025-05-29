@@ -1,0 +1,32 @@
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - argocd.mafialegends.site  # فقط مقدار host را اینجا بنویسید
+    paths:
+      - /
+    pathType: Prefix
+    tls: []
+
+  extraArgs:
+    - --insecure
+
+  service:
+    type: ClusterIP
+
+configs:
+  params:
+    server.insecure: "true"
+
+controller:
+  metrics:
+    enabled: true
+
+repoServer:
+  metrics:
+    enabled: true
+
+applicationSet:
+  metrics:
+    enabled: true
