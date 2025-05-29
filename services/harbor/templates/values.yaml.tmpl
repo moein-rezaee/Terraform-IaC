@@ -1,0 +1,58 @@
+# Disable internal Redis and PostgreSQL
+redis:
+  enabled: false
+
+externalRedis:
+  host: redis-master.redis.svc.cluster.local
+  port: 6379
+  password: "${redis_password}"
+
+database:
+  type: external
+  external:
+    host: postgresql.postgresql.svc.cluster.local
+    port: 5432
+    username: postgres
+    password: "${postgresql_password}"
+    database: registry
+
+expose:
+  type: ingress
+  ingress:
+    hosts:
+      core: harbor.mafialegends.site
+    controller: default
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/x-forwarded-prefix: /
+  tls:
+    enabled: false
+
+externalURL: http://harbor.mafialegends.site
+
+# Optional admin setup
+harborAdminPassword: "${harbor_admin_password}"
+
+# Use PVC with your own storage class
+persistence:
+  enabled: true
+  storageClass: "local-path"
+  persistentVolumeClaim:
+    registry:
+      size: 5Gi
+    chartmuseum:
+      size: 2Gi
+    jobservice:
+      size: 1Gi
+    database:
+      size: 1Gi
+    redis:
+      size: 1Gi
+    trivy:
+      size: 5Gi
+
+trivy:
+  enabled: true
