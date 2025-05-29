@@ -1,4 +1,3 @@
-# Disable internal Redis and PostgreSQL
 redis:
   enabled: false
 
@@ -33,10 +32,8 @@ expose:
 
 externalURL: http://harbor.mafialegends.site
 
-# Optional admin setup
 harborAdminPassword: "${harbor_admin_password}"
 
-# Use PVC with your own storage class
 persistence:
   enabled: true
   storageClass: "local-path"
@@ -47,12 +44,24 @@ persistence:
       size: 2Gi
     jobservice:
       size: 1Gi
-    database:
-      size: 1Gi
-    redis:
-      size: 1Gi
     trivy:
       size: 5Gi
 
 trivy:
   enabled: true
+
+# 🔥 تنظیمات مهم برای Cache و Jobservice جهت استفاده از Redis خارجی
+cache:
+  enabled: true
+  type: redis
+  redis:
+    addr: "redis-master.redis.svc.cluster.local:6379"
+    password: "${redis_password}"
+    db: 0
+
+jobservice:
+  jobLogger: file
+  redis:
+    addr: "redis-master.redis.svc.cluster.local:6379"
+    password: "${redis_password}"
+    db: 1
