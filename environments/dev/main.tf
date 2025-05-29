@@ -50,3 +50,13 @@ module "harbor" {
   redis_password      = var.redis_password
   harbor_admin_password = var.harbor_admin_password
 }
+
+module "woodpecker" {
+  source = "../../services/woodpecker"
+
+  woodpecker_agent_secret = var.woodpecker_agent_secret
+  woodpecker_admin        = var.woodpecker_admin
+  gitea_server            = var.gitea_server
+  gitea_client_id         = var.gitea_client_id
+  gitea_client_secret     = var.gitea_client_secret
+}

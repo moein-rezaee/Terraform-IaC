@@ -1,0 +1,34 @@
+apiVersion: v2
+name: woodpecker
+description: A Helm chart for Woodpecker CI
+type: application
+version: 3.1.1
+# renovate: datasource=github-releases depName=woodpecker-ci/woodpecker extractVersion=^v(?<version>.*)$
+appVersion: 3.6.0
+home: https://woodpecker-ci.org/
+icon: https://avatars.githubusercontent.com/u/84780935?s=200&v=4
+
+maintainers:
+  - name: Woodpecker Maintainers
+    email: owner@woodpecker-ci.org
+    url: https://github.com/woodpecker-ci
+
+keywords:
+  - continuous-delivery
+  - continuous-deployment
+  - continuous-integration
+  - docker
+  - go
+  - kubernetes
+
+sources:
+  - https://github.com/woodpecker-ci/woodpecker.git
+  - https://github.com/woodpecker-ci/helm.git
+
+dependencies:
+  - name: server
+    version: 3.0.1
+    condition: server.enabled
+  - name: agent
+    version: 2.0.1
+    condition: agent.enabled

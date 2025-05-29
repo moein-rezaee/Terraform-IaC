@@ -2,8 +2,8 @@ resource "helm_release" "this" {
   name             = var.name
   namespace        = var.namespace
   chart            = var.chart
-  repository       = var.repository
-  version          = var.chart_version
+  repository       = var.repository != null ? var.repository : null
+  version          = var.chart_version != null ? var.chart_version : null
   create_namespace = true
 
   values = var.values_content != null ? [var.values_content] : [file(var.values_path)]

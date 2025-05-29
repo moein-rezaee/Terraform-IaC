@@ -1,0 +1,34 @@
+server:
+  env:
+    WOODPECKER_HOST: "https://${hostname}"
+    WOODPECKER_AGENT_SECRET: "${woodpecker_agent_secret}"
+    WOODPECKER_ADMIN: "${woodpecker_admin}"
+    WOODPECKER_GITEA: "true"
+    WOODPECKER_GITEA_URL: "https://${gitea_server}"
+    WOODPECKER_GITEA_CLIENT: "${gitea_client_id}"
+    WOODPECKER_GITEA_SECRET: "${gitea_client_secret}"
+
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    hosts:
+      - host: "${hostname}"
+        paths:
+          - path: /
+            pathType: Prefix
+    annotations: {}
+
+  persistentVolume:
+    enabled: true
+    storageClass: "local-path"
+    size: "1Gi"
+
+agent:
+  env:
+    WOODPECKER_SERVER: "woodpecker-server:9000"
+    WOODPECKER_AGENT_SECRET: "${woodpecker_agent_secret}"
+
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    size: "1Gi"
