@@ -65,3 +65,8 @@ module "argocd" {
   source = "../../services/argocd"
   hostname = "argocd.mafialegends.site"
 }
+
+module "portainer" {
+  source    = "../../services/portainer"
+  hostname  = "portainer.mafialegends.site"
+}
