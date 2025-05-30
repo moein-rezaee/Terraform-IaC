@@ -1,0 +1,23 @@
+service:
+  type: ClusterIP
+
+persistence:
+  enabled: true
+  storageClass: "local-path"
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hosts:
+    - host: "${hostname}"
+      paths:
+        - path: /
+          pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: /
+  tls: []
