@@ -70,3 +70,10 @@ module "portainer" {
   source    = "../../services/portainer"
   hostname  = "portainer.mafialegends.site"
 }
+
+module "local_path_provisioner" {
+  source        = "../../modules/local_path_provisioner"
+  name          = "local-path-provisioner"
+  namespace     = "local-path-provisioner"
+  storage_path  = "/home/kubernetes/volumes"
+}
