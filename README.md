@@ -52,8 +52,8 @@ infrastructure/
 
 ### 1. Clone the repository
 ```shell
-git clone https://github.com/mafialegends/iac.git
-cd iac/infrastructure/environments/dev
+git clone https://github.com/moein-rezaee/Terraform-IaC.git
+cd infrastructure/environments/dev
 ```
 
 ### 2. Configure your environment variables
@@ -126,7 +126,7 @@ Distributed under the [MIT License](LICENSE).
 
 ## 💬 Questions & Discussions
 
-- Open an [issue](https://github.com/mafialegends/iac/issues) or [start a discussion](https://github.com/mafialegends/iac/discussions).
+- Open an [issue](https://github.com/moein-rezaee/Terraform-IaC/issues)
 
 ---
 
