@@ -1,5 +1,5 @@
 
-# 🚀 Mafialegends IaC (Infrastructure as Code)
+# 🚀 IaC (Infrastructure as Code)
 
 Manage all of your infrastructure **as code** using [Terraform](https://www.terraform.io/) – modular, reproducible, and production-ready.
 
